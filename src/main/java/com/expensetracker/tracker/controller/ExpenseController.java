@@ -19,8 +19,14 @@ public class ExpenseController {
     
     @PostMapping
     public Expense create(@RequestBody Expense expense) {
-        return expenseService.saveExpense(expense);
+    	return expenseService.saveExpense(expense);
     }
+    
+    @PostMapping("/ai")
+    public Expense createWithAi(@RequestBody Expense expense) {
+    	return expenseService.saveExpenseWithAi(expense);
+    }
+
 
     @GetMapping
     public List<Expense> getFilteredExpenses(

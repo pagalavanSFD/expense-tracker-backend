@@ -12,8 +12,18 @@ import java.util.List;
 @Service
 public class ExpenseService {
 
+
     @Autowired
     private ExpenseRepository expenseRepository;
+    @Autowired
+    private HuggingFaceService huggingFaceService;  // Inject the HuggingFaceService
+    
+    public Expense saveExpenseWithAi(Expense expense) {
+    	String category = huggingFaceService.getCategory(expense.getTitle());
+    	// You can further process the category response (parsing JSON, etc.)
+    	expense.setCategory(category);  // Set the category as determined by AI
+    	return expenseRepository.save(expense);
+    }
 
     public Expense saveExpense(Expense expense) {
         return expenseRepository.save(expense);

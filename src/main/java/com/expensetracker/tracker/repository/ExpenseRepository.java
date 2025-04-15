@@ -14,6 +14,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 	List<Expense> findByAmountBetween(Double min, Double max);
 	List<Expense> findByDateBetween(LocalDate from, LocalDate to);
 	
+	List<Expense> findByUserIdAndDateBetween(String userId, LocalDate startDate, LocalDate endDate);
+	
 	@Query("SELECT new com.expensetracker.tracker.dto.ExpenseChartData(e.category, SUM(e.amount)) " +
 		       "FROM Expense e WHERE e.date BETWEEN :start AND :end " +
 		       "GROUP BY e.category")
